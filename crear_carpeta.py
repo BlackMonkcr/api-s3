@@ -2,8 +2,8 @@ import boto3
 
 def lambda_handler(event, context):
     # Entrada: nombre del bucket y nombre de la carpeta
-    bucket_name = event.get('bucket_name')
-    folder_name = event.get('folder_name')
+    bucket_name = event['body']['bucket_name']
+    folder_name = event['body']['folder_name']
     
     # Validación de entrada
     if not bucket_name or not folder_name:
