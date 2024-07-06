@@ -3,7 +3,7 @@ from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
     # Entrada: nombre del bucket
-    bucket_name = event.get('bucket_name')
+    bucket_name = event['body']['bucket_name']
     
     # Validación de entrada
     if not bucket_name:
