@@ -27,3 +27,20 @@ functions:
           method: post
           cors: true
           integration: lambda
+  crear_bucket:
+    handler: crear_bucket.lambda_handler
+    memorySize: 512
+    events:
+      - http:
+          path: /s3/crear-bucket
+          method: post
+          cors: true
+          integration: lambda
+  crear_carpeta:
+    handler: crear_carpeta.lambda_handler
+    events:
+      - http:
+          path: /s3/bucket/crear-carpeta
+          method: post
+          cors: true
+          integration: lambda
