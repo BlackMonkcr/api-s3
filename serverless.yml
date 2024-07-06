@@ -4,6 +4,7 @@ service: api-s3
 provider:
   name: aws
   runtime: python3.12	
+  region: us-east-1  # Especifica la región por defecto
   # Default memory size for functions (default: 256MB)
   memorySize: 1024
   iam:
@@ -36,6 +37,14 @@ functions:
           method: post
           cors: true
           integration: lambda
+    environment:
+      AWS_REGION: ${self:provider.region}
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:CreateBucket
+          - s3:PutObject
+        Resource: "*"
   crear_carpeta:
     handler: crear_carpeta.lambda_handler
     events:
@@ -44,3 +53,10 @@ functions:
           method: post
           cors: true
           integration: lambda
+    environment:
+      AWS_REGION: ${self:provider.region}
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:PutObject
+        Resource: "*"
